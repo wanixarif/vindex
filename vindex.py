@@ -1,9 +1,14 @@
 # # import subprocess
 import os
 import sys
-fname = input("File name:: ")
+while True:
+	fname = input("File name:: ")
+	if os.path.exists(fname):
+		break
+	else:
+		print("File doesn't exist, retry")
 x = len(fname)
-occurence_number=0
+occurence_number = 0
 mult_occurences = list()
 #x-4 to ommit extension, won't work for .ts files or files with
 #extension not equal to three characters
@@ -26,12 +31,14 @@ while f.readline():
 if not flag:
 	print('Not found try entering some other closely related word.')
 	sys.exit()
-if len(mult_occurences)>1:
+if len(mult_occurences) > 1:
     print("More than one occurence(s) found:")
-    for i in range(0,len(mult_occurences)):
-        print(i+1,")  ",mult_occurences[i])
-    occurence_number=int(input("Enter your choice to play at: "))-1
-t=mult_occurences[occurence_number]
-time=int(t[0:2])*3600 + int(t[3:5])*60 + int(t[6:])
-time_command='./seek.sh '+str(time)+' '+fname
+    for i in range(0, len(mult_occurences)):
+        print(i+1, ")  ", mult_occurences[i])
+    occurence_number = int(input("Enter your choice to play at: "))-1
+else:
+    print("Found at ",mult_occurences[0])
+t = mult_occurences[occurence_number]
+time = int(t[0:2])*3600 + int(t[3:5])*60 + int(t[6:])
+time_command = './seek.sh '+str(time)+' '+fname
 os.system(time_command)
