@@ -10,6 +10,7 @@ while True:
 x = len(fname)
 occurence_number = 0
 mult_occurences = list()
+sentence_list=list()
 #x-4 to ommit extension, won't work for .ts files or files with
 #extension not equal to three characters
 if not os.path.exists(fname[0:(x-4)]+'.srt'):
@@ -26,6 +27,7 @@ while f.readline():
         if z in c.strip().split():
             if z not in mult_occurences:
                 mult_occurences.append(a[:8])
+                sentence_list.append(c)
             flag = 1
         c = f.readline().lower()
 if not flag:
@@ -34,7 +36,7 @@ if not flag:
 if len(mult_occurences) > 1:
     print("More than one occurence(s) found:")
     for i in range(0, len(mult_occurences)):
-        print(i+1, ")  ", mult_occurences[i])
+        print(i+1, ")  ",sentence_list[i]," at ", mult_occurences[i])
     occurence_number = int(input("Enter your choice to play at: "))-1
 else:
     print("Found at ",mult_occurences[0])
