@@ -1,11 +1,15 @@
 # # import subprocess
 import os
-fname=input("File name and start pos")
-x=len(fname)
-mult_occurences=list()
+import sys
+fname = input("File name:: ")
+x = len(fname)
+occurence_number=0
+mult_occurences = list()
+#x-4 to ommit extension, won't work for .ts files or files with
+#extension not equal to three characters
 if not os.path.exists(fname[0:(x-4)]+'.srt'):
     command = './vid.sh '+fname
-    print("Generating subs")    
+    print("Generating subs")
     os.system(command)
 f = open(fname[0:(x-4)]+'.srt', "r")
 z = input('Enter word:').lower()
@@ -20,19 +24,14 @@ while f.readline():
             flag = 1
         c = f.readline().lower()
 if not flag:
-	print('Not found')
-t=mult_occurences[0]
+	print('Not found try entering some other closely related word.')
+	sys.exit()
+if len(mult_occurences)>1:
+    print("More than one occurence(s) found:")
+    for i in range(0,len(mult_occurences)):
+        print(i+1,")  ",mult_occurences[i])
+    occurence_number=int(input("Enter your choice to play at: "))-1
+t=mult_occurences[occurence_number]
 time=int(t[0:2])*3600 + int(t[3:5])*60 + int(t[6:])
 time_command='./seek.sh '+str(time)+' '+fname
 os.system(time_command)
-
-
-# fp = open(fname[0:(x-4)]+'.srt',"r")
-# read=fp.readlines()
-# with open("x.txt","w") as new:
-#     for i in read:
-#         new.write(i)
-# # for y in read:
-# #     print("Found")
-# fp.close()
-
