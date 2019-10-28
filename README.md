@@ -12,7 +12,11 @@ Place the video files and subtiles(if exists) in the same folder
 
 If the subtitles don't exist, it'll auto generate.
 
-Download the repository and run sub.py
+Download the repository
+
+Run chmod +x seek.sh && chmod +x vid.sh in your terminal, from the folder where it is downloaded.(Only for the first time)
+
+Now run "python sub.py"
 
 Enter file name then after subtitle generation enter your search term.
 
