@@ -25,7 +25,7 @@ in your terminal, from the folder where it is downloaded.(Only for the first tim
 
 Now run
 ```
-python sub.py
+python vindex.py
 ```
 
 Enter file name then after subtitle generation enter your search term.
