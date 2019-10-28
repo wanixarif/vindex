@@ -4,10 +4,14 @@ A search tool that plays the video from a place where a search term exists using
 
 Runs on python3.
 
-Install autosub using
+Install autosub and ffmpeg using
 ```
 pip install autosub
 ```
+```
+sudo YOUR-PACKAGE-MANAGER install ffmpeg
+```
+YOUR-PACKAGE-MANGER= apt or pacman or yum or dnf, depends on your distro
 
 Install vlc.
 
