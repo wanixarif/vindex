@@ -1,0 +1,1 @@
+autosub $1
