@@ -3,3 +3,5 @@ Mark X in [] if done, example [X] Feature 1
 [] Show the sentence containing the word
 
 [] Try to find a word closest to the entered word, if not exists
+
+[] Make a web app based GUI
