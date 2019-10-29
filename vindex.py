@@ -45,8 +45,10 @@ if len(mult_occurences) > 1:
     while isint:
         try:
             occurence_number = int(input("Enter your choice to play at: "))-1
-            if occurence_number<len(mult_occurences):
+            if occurence_number<len(mult_occurences) and occurence_number>0:
                 isint=0
+            else:
+                print("Invalid choice")
         except:
             print("Invalid choice")
 else:
