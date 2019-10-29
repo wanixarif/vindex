@@ -1,25 +1,28 @@
 import os
 import sys
+from difflib import get_close_matches
 while True:
-	fname = input("File name:: ")
+	fname = input("File name:: ").strip(' ')
 	if os.path.exists(fname):
 		break
 	else:
 		print("File doesn't exist, retry")
-x = len(fname)
 occurence_number = 0
 mult_occurences = list()
 sentence_list=list()
+word_list=set()
 found=True
 isint=1
-#x-4 to ommit extension, won't work for .ts files or files with
-#extension not equal to three characters
-if not os.path.exists(fname[0:(x-4)]+'.srt'):
+num=0
+sub_name = fname[0:len(fname)-fname[::-1].find('.')] + 'srt'
+#check if subtitle exists
+if not os.path.exists(sub_name):
     command = './vid.sh '+fname
     print("Generating subs")
     os.system(command)
+#search
 while found:
-    subs_file = open(fname[0:(x-4)]+'.srt', "r")
+    subs_file = open(sub_name, "r")
     search_term = input('Enter word:').lower()
     while subs_file.readline():
         flag = 0
@@ -28,8 +31,10 @@ while found:
         para=''
         while line and line != '\n':
             para+=line
-            if search_term in line.strip().split():
-                if search_term not in mult_occurences:
+            word_list=word_list|set(line.strip('.\n').split())
+            if search_term in line.strip().split() or (search_term in line.strip() and ' ' in search_term):
+                num+=1
+                if time_stamp[0:8] not in mult_occurences:
                     mult_occurences.append(time_stamp[:8])
                 flag = 1
                 found=False
@@ -37,15 +42,21 @@ while found:
         if(flag==1):
             sentence_list.append(para)
     if not flag:
-        print('Not found try entering some other closely related word.')
+        if len(get_close_matches(search_term, list(word_list))) > 0 and num==0:
+            print('Not found try searching one of these:')
+            print(', '.join(get_close_matches(search_term, list(word_list))))
+        elif num==0:
+            print("No matches or words close to the entered term found")
 if len(mult_occurences) > 1:
     print("More than one occurence found:")
     for i in range(0, len(mult_occurences)):
         print(i+1, ") ",sentence_list[i]," at ", mult_occurences[i],sep='')
     while isint:
+        #Check if not a number
         try:
             occurence_number = int(input("Enter your choice to play at: "))-1
-            if occurence_number<len(mult_occurences) and occurence_number>0:
+            #choice constraint
+            if occurence_number<len(mult_occurences) and occurence_number>=0:
                 isint=0
             else:
                 print("Invalid choice")
