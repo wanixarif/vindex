@@ -31,6 +31,10 @@ Now run
 ```
 python vindex.py
 ```
+if it gives errors try
+```
+python3 vindex.py
+```
 
 Enter file name then after subtitle generation enter your search term.
 
