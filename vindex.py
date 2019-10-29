@@ -1,4 +1,3 @@
-# # import subprocess
 import os
 import sys
 while True:
@@ -10,32 +9,46 @@ while True:
 x = len(fname)
 occurence_number = 0
 mult_occurences = list()
+sentence_list=list()
+found=True
+isint=1
 #x-4 to ommit extension, won't work for .ts files or files with
 #extension not equal to three characters
 if not os.path.exists(fname[0:(x-4)]+'.srt'):
     command = './vid.sh '+fname
     print("Generating subs")
     os.system(command)
-f = open(fname[0:(x-4)]+'.srt', "r")
-z = input('Enter word:').lower()
-flag = 0
-while f.readline():
-    a = f.readline()
-    c = f.readline().lower()
-    while c and c != '\n':
-        if z in c.strip().split():
-            if z not in mult_occurences:
-                mult_occurences.append(a[:8])
-            flag = 1
-        c = f.readline().lower()
-if not flag:
-	print('Not found try entering some other closely related word.')
-	sys.exit()
+while found:
+    subs_file = open(fname[0:(x-4)]+'.srt', "r")
+    search_term = input('Enter word:').lower()
+    while subs_file.readline():
+        flag = 0
+        time_stamp = subs_file.readline()
+        line = subs_file.readline().lower()
+        para=''
+        while line and line != '\n':
+            para+=line
+            if search_term in line.strip().split():
+                if search_term not in mult_occurences:
+                    mult_occurences.append(time_stamp[:8])
+                flag = 1
+                found=False
+            line = subs_file.readline().lower()
+        if(flag==1):
+            sentence_list.append(para)
+    if not flag:
+        print('Not found try entering some other closely related word.')
 if len(mult_occurences) > 1:
-    print("More than one occurence(s) found:")
+    print("More than one occurence found:")
     for i in range(0, len(mult_occurences)):
-        print(i+1, ")  ", mult_occurences[i])
-    occurence_number = int(input("Enter your choice to play at: "))-1
+        print(i+1, ") ",sentence_list[i]," at ", mult_occurences[i],sep='')
+    while isint:
+        try:
+            occurence_number = int(input("Enter your choice to play at: "))-1
+            if occurence_number<len(mult_occurences):
+                isint=0
+        except:
+            print("Invalid choice")
 else:
     print("Found at ",mult_occurences[0])
 t = mult_occurences[occurence_number]
