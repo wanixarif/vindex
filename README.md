@@ -1,6 +1,9 @@
 # Vindex
+>Video Indexing tool
 
-A search tool that plays the video from a place where a search term exists using subtitles. Uses *autosub* to generate subtitles and *vlc* to play files.
+Your Ctrl+F kind of utility for videos!
+
+Enter your search term in text format and see where the phrase exists in the video and be able to directly play from that position, also tries to find the closest possible matches if your query doesn't exist.
 
 Runs on python3.
 
@@ -9,23 +12,23 @@ Install autosub and ffmpeg using
 pip install autosub
 ```
 ```
-sudo YOUR-PACKAGE-MANAGER install ffmpeg
+sudo YOUR-PACKAGE-MANAGER-INSTALL-COMMAND ffmpeg
 ```
-YOUR-PACKAGE-MANGER= apt or pacman or yum or dnf, depends on your distro
+YOUR-PACKAGE-MANGER-INSTALL-COMMAND = "apt install" or "pacman -Sy" or yum or dnf, depends on your distro
 
-Install vlc.
+>Install vlc media player.
 
-Place the video files and subtiles(if exists) in the same folder
-
-If the subtitles don't exist, it'll auto generate.
-
-Download the repository
+Download this repository
 
 Run 
 ```
 chmod +x seek.sh && chmod +x vid.sh
 ```
-in your terminal, from the folder where it is downloaded.(Only for the first time)
+in your terminal, from within the folder where it is downloaded.(Only for the first time)
+
+Place the video files and subtiles(if exists) in the same folder
+
+If the subtitles don't exist, it'll auto generate.
 
 Now run
 ```
@@ -36,6 +39,4 @@ if it gives errors try
 python3 vindex.py
 ```
 
-Enter file name then after subtitle generation enter your search term.
-
-In case your query doesn't match any result, try entering a word that might appear close to it.
+Enter file name (with extension) then after subtitle generation enter your search term or phrase.
