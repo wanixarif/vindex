@@ -4,5 +4,9 @@ Mark X in [] if done, example [X] Feature 1
 
 [X] Try to find a word closest to the entered word, if not exists
 
+[] Make pip package
+
+[] Make OS independent
+
 [] Make a web app based GUI
 
