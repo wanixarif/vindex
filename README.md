@@ -22,7 +22,7 @@ Download this repository
 
 Run 
 ```
-chmod +x seek.sh && chmod +x vid.sh
+chmod +x seek.sh vid.sh
 ```
 in your terminal, from within the folder where it is downloaded.(Only for the first time)
 
